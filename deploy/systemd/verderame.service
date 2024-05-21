@@ -1,0 +1,13 @@
+[Unit]
+Description=Verderame
+After=network.target
+
+[Service]
+ExecStart=$HOME/verderame/run.sh
+WorkingDirectory=$HOME/verderame
+User=pi
+EnvironmentFile=$HOME/verderame/.env
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
