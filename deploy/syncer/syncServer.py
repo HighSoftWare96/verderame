@@ -18,4 +18,3 @@ if __name__ == '__main__':
     port = 5000
     app.run(host='127.0.0.1', port=(port))
     print(f"Server running on port {port}")
-
