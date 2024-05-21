@@ -11,6 +11,6 @@ git checkout "$branch"
 git pull
 
 echo "🤖 Restarting service with new modifications..."
-sudo systemctl restart verderame.service
+sudo systemctl restart verderamen.service
 echo "✅ Service updated and restarted correctly!"
 
