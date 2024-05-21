@@ -13,14 +13,14 @@ chmod +x ./deploy/syncer/sync.sh
 
 sudo cp ./deploy/systemd/*.service /etc/systemd/system/
 sudo systemctl daemon-reload
-sudo systemctl enable verderame-syncer.service
-sudo systemctl enable verderame.service
+sudo systemctl enable verderamen-syncer.service
+sudo systemctl enable verderamen.service
 sudo systemctl enable ngrok.service
-sudo systemctl start verderame-syncer.service
-sudo systemctl start verderame.service
+sudo systemctl start verderamen-syncer.service
+sudo systemctl start verderamen.service
 sudo systemctl start ngrok.service
-sudo systemctl status verderame-syncer.service
-sudo systemctl status verderame.service
+sudo systemctl status verderamen-syncer.service
+sudo systemctl status verderamen.service
 sudo systemctl status ngrok.service
 
 echo "Your app is listening on $NGROK_STATIC_DOMAIN..."

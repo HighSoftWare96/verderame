@@ -1,4 +1,7 @@
-# verderame
+# verderamen
+
+![Alt text](./verderamen.png "Verderamen logo")
+
 DontLetYourVegetablesDie!
 
 ## Deploy on rasbperry
@@ -13,9 +16,9 @@ For the deploy on the Raspberry device:
 ## First installation
 
 - Setup your ngrok account and obtain an API token
-- Clone repository on your device in `$HOME/verderame`
-- Fix your environment inside `verderame/.env` (add user password!)
-- Run `NGROK_APP_TOKEN={YOUR_TOKEN} pipenv run install`
+- Clone repository on your device in `$HOME/verderamen`
+- Fix your environment inside `verderamen/.env` (add NGROK_STATIC_DOMAIN, NGROK_APP_TOKEN)
+- Run `pipenv run install`
 
-The syncServer should be running as systemd service `verderame-syncer`, this service will sync automatically the just cloned repository and restart the systemd service `verderame` that is the actual application.
+The syncServer should be running as systemd service `verderamen-syncer`, this service will sync automatically the just cloned repository and restart the systemd service `verderamen` that is the actual application.
 

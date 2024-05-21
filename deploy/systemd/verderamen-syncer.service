@@ -1,12 +1,12 @@
 [Unit]
-Description=Verderame syncer server
+Description=verderamen syncer server
 After=network.target
 
 [Service]
-ExecStart=/home/pi/verderame/run-sync.sh
-WorkingDirectory=/home/pi/verderame
+ExecStart=/home/pi/verderamen/run-sync.sh
+WorkingDirectory=/home/pi/verderamen
 User=pi
-EnvironmentFile=/home/pi/verderame/.env
+EnvironmentFile=/home/pi/verderamen/.env
 Environment="PATH=$PATH:/home/pi/.local/bin/:/home/pi/.pyenv/plugins/pyenv-virtualenv/shims:/home/pi/.pyenv/shims:/home/pi/.pyenv/bin:/home/pi/.pyenv/plugins/pyenv-virtualenv/shims:/home/pi/.pyenv/bin:/home/pi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games"
 Restart=always
 
