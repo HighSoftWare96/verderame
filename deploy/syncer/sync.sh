@@ -13,3 +13,4 @@ git pull
 echo "🤖 Restarting service with new modifications..."
 sudo systemctl restart verderame.service
 echo "✅ Service updated and restarted correctly!"
+
