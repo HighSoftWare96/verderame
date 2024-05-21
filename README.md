@@ -1,4 +1,7 @@
 # verderamen
+
+![Alt text](./verderamen.png "Verderamen logo")
+
 DontLetYourVegetablesDie!
 
 ## Deploy on rasbperry
