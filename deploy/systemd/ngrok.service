@@ -4,6 +4,7 @@ After=network.target
 
 [Service]
 ExecStart=/usr/local/bin/ngrok config add-authtoken $NGROK_APP_TOKEN && /usr/local/bin/ngrok http --domain=$NGROK_STATIC_DOMAIN 5000
+EnvironmentFile=/home/pi/verderame/.env
 ExecReload=/bin/kill -HUP $MAINPID
 KillMode=process
 IgnoreSIGPIPE=true
