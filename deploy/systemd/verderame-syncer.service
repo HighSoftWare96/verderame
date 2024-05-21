@@ -3,10 +3,10 @@ Description=Verderame syncer server
 After=network.target
 
 [Service]
-ExecStart=$HOME/verderame/run-sync.sh
-WorkingDirectory=$HOME/verderame
+ExecStart=/home/pi/verderame/run-sync.sh
+WorkingDirectory=/home/pi/verderame
 User=pi
-EnvironmentFile=$HOME/verderame/.env
+EnvironmentFile=/home/pi/verderame/.env
 Restart=always
 
 [Install]

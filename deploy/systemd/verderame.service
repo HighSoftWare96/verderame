@@ -3,10 +3,10 @@ Description=Verderame
 After=network.target
 
 [Service]
-ExecStart=$HOME/verderame/run.sh
-WorkingDirectory=$HOME/verderame
+ExecStart=/home/pi/verderame/run.sh
+WorkingDirectory=/home/pi/verderame
 User=pi
-EnvironmentFile=$HOME/verderame/.env
+EnvironmentFile=/home/pi/verderame/.env
 Restart=always
 
 [Install]
