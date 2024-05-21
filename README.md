@@ -21,4 +21,3 @@ For the deploy on the Raspberry device:
 - Run `pipenv run install`
 
 The syncServer should be running as systemd service `verderamen-syncer`, this service will sync automatically the just cloned repository and restart the systemd service `verderamen` that is the actual application.
-
