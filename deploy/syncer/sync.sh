@@ -1,7 +1,7 @@
 #!/bin/bash
 branch="$1"
 
-if [[ -z $branch ]]
+if [[ -z $branch ]]; then
   branch="main"
 fi
 
