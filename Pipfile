@@ -7,8 +7,13 @@ name = "pypi"
 "rpi.gpio" = "*"
 flask = "*"
 flask-httpauth = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.10"
+
+[scripts]
+install = "bash ./deploy/install.sh"
+sync = "python ./deploy/syncer/syncServer.py"

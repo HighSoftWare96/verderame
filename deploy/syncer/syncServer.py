@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 from flask import Flask, request
 from flask_httpauth import HTTPBasicAuth
 import os
@@ -7,7 +10,7 @@ app = Flask(__name__)
 auth = HTTPBasicAuth()
 user = { "$$admin": os.environ["USER_PASSWORD"] }
 
-@auth.basic
+@auth.verify_password
 def basic(username, password):
     if username in user and user[username] == password:
         return username
@@ -23,6 +26,6 @@ def webhook():
         return 'Not a valid request', 422
 
 if __name__ == '__main__':
-    port = os.environ["PORT"] or 5000
-    app.run(host='0.0.0.0', port=(port))
+    port = 5000
+    app.run(host='127.0.0.1', port=(port))
     print(f"Server running on port {port}")
