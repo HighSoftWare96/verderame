@@ -7,6 +7,9 @@ curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
 ngrok config add-authtoken $NGROK_APP_TOKEN
 
 
+chmod +x ./run-sync.sh
+chmod +x ./run.sh
+
 sudo cp ./deploy/systemd/*.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable verderame-syncer.service
