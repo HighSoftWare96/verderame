@@ -13,9 +13,6 @@ class TankLevel:
       self.distance_interval=self.tank_level_max_distance_cm - self.tank_level_min_distance_cm
       self.sound_speed = 34340
         
-    def __del__(self):
-        GPIO.cleanup()
-        
     def setup(self):
       pass
     
