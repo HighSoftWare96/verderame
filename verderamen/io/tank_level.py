@@ -14,7 +14,8 @@ class TankLevel:
       self.sound_speed = 34340
         
     def setup(self):
-      pass
+      GPIO.setup(self.tank_level_in_pin, GPIO.IN)
+      GPIO.setup(self.tank_level_out_pin, GPIO.OUT)
     
     def loop(self):
       avg = self.measure_avg()
@@ -27,16 +28,16 @@ class TankLevel:
       
 
     def measure_one(self):
-        GPIO.output(self.tank_level_out_pin, True)
+        GPIO.output(self.tank_level_out_pin, GPIO.HIGH)
         time.sleep(0.00001)
-        GPIO.output(self.tank_level_out_pin, False)
+        GPIO.output(self.tank_level_out_pin, GPIO.LOW)
 
         start = time.time()
 
-        while GPIO.input(self.tank_level_in_pin) == 0:
+        while GPIO.input(self.tank_level_in_pin) == GPIO.LOW:
             start = time.time()
 
-        while GPIO.input(self.tank_level_in_pin) == 1:
+        while GPIO.input(self.tank_level_in_pin) == GPIO.HIGH:
             stop = time.time()
 
         elapsed = stop - start
