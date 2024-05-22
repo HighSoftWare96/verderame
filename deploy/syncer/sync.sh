@@ -13,4 +13,3 @@ git pull
 echo "🤖 Restarting service with new modifications..."
 sudo systemctl restart verderamen.service
 echo "✅ Service updated and restarted correctly!"
-
