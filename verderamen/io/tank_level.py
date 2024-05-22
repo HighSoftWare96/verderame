@@ -6,11 +6,11 @@ GPIO.setmode(GPIO.BCM)
 
 class TankLevel:
     def __init__(self):
-      self.tank_level_out_pin = get_config_key('TANK_LEVEL_OUT_PIN')
-      self.tank_level_in_pin = get_config_key('TANK_LEVEL_IN_PIN')
-      self.TANK_LEVEL_MIN_DISTANCE_CM= get_config_key('TANK_LEVEL_MIN_DISTANCE_CM')
-      self.TANK_LEVEL_MAX_DISTANCE_CM= get_config_key('TANK_LEVEL_MAX_DISTANCE_CM')
-      self.distance_interval=self.TANK_LEVEL_MAX_DISTANCE_CM - self.TANK_LEVEL_MIN_DISTANCE_CM
+      self.tank_level_out_pin = get_config_key('TANK_LEVEL_OUT_PIN', int)
+      self.tank_level_in_pin = get_config_key('TANK_LEVEL_IN_PIN', int)
+      self.tank_level_min_distance_cm= get_config_key('TANK_LEVEL_MIN_DISTANCE_CM', int)
+      self.tank_level_max_distance_cm= get_config_key('TANK_LEVEL_MAX_DISTANCE_CM', int)
+      self.distance_interval=self.tank_level_max_distance_cm - self.tank_level_min_distance_cm
       self.sound_speed = 34340
         
     def __del__(self):
