@@ -1,5 +1,5 @@
 #!/bin/bash
-branch="$1"
+branch="$VERDERAME_BRANCH"
 
 if [[ -z $branch ]]; then
   branch="main"
