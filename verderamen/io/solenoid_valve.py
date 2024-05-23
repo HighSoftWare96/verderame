@@ -12,9 +12,10 @@ class SolenoidValve:
      # test
      GPIO.output(self.valve_transistor_base_out_pin, GPIO.HIGH)
      is_open=GPIO.input(self.valve_transistor_base_out_pin)
-     return {
+     stats = {
         "is_open": is_open
      }
+     return stats
   
   def open(self):
      GPIO.output(self.valve_transistor_base_out_pin, GPIO.HIGH)
