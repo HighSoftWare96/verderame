@@ -4,8 +4,8 @@ import signal
 
 manager = Manager()
 
-def signal_handler():
-  print('SIGINT/SIGTERM received, tearing down')
+def signal_handler(sig, frame):
+  print(f'{sig} received, tearing down')
   manager.teardown()
   sys.exit(0)
 
