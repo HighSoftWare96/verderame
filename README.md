@@ -64,6 +64,7 @@ For the tank level a HC-SR04 ultrasonic sensor is used. For this component these
 | Other     |   Normally closed   |
 | Class     |   `/verderamen/io/tank_level.py`   |
 
+
 The valve is wired to a 12V DC Power supply. The ground is wired to a NPN Transistor Collector (specific model: [PN2222](https://users.ece.utexas.edu/~valvano/Datasheets/PN2222-D.pdf)). The base of the transistor is wired to GPIO PIN set by `VALVE_TRANSISTOR_BASE_OUT_PIN` with a resistor of 180 Ohms (calculated [here](https://guitarscience.net/calcs/ceswtch.htm)). The emitter of the transitor is wired to ground. When the `VALVE_TRANSISTOR_BASE_OUT_PIN` is `HIGH` the valve will open, when `LOW` will be (default) closed.
 
 Configuration:
