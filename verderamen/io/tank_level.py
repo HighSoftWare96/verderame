@@ -18,7 +18,7 @@ class TankLevel:
       GPIO.setup(self.tank_level_out_pin, GPIO.OUT)
   
     def teardown(self):
-        pass
+      GPIO.cleanup([self.tank_level_in_pin, self.tank_level_out_pin])
     
     def loop(self):
       avg = self.measure_avg()

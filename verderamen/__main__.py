@@ -13,11 +13,14 @@ signal.signal(signal.SIGINT, signal_handler)
 signal.signal(signal.SIGTERM, signal_handler)
 
 def main():
-  print('Manager setup running...')
-  manager.setup()
-  print('Manager setup done! Starting main loop...')
-  while(True):
-    manager.loop()
+  try:
+    print('Manager setup running...')
+    manager.setup()
+    print('Manager setup done! Starting main loop...')
+    while(True):
+      manager.loop()
+  finally:
+    manager.teardown()
 
 
 if __name__ == '__main__':

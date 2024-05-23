@@ -9,7 +9,7 @@ class SolenoidValve:
      GPIO.setup(self.valve_transistor_base_out_pin, GPIO.OUT)
   
   def teardown(self):
-     pass
+      GPIO.cleanup(self.valve_transistor_base_out_pin)
 
   def loop(self):
      # test
