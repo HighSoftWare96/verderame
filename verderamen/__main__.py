@@ -1,7 +1,18 @@
 from .manager import Manager
+import sys
+import signal
+
+manager = Manager()
+
+def signal_handler():
+  print('SIGINT/SIGTERM received, tearing down')
+  manager.teardown()
+  sys.exit(0)
+
+signal.signal(signal.SIGINT, signal_handler)
+signal.signal(signal.SIGTERM, signal_handler)
 
 def main():
-  manager = Manager()
   print('Manager setup running...')
   manager.setup()
   print('Manager setup done! Starting main loop...')

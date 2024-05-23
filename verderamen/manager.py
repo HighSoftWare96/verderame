@@ -8,13 +8,15 @@ class Manager:
     self.tank = TankLevel()
     self.valve = SolenoidValve()
 
-  def __del__(self):
-    GPIO.cleanup()
-
   def setup(self):
     GPIO.setmode(GPIO.BCM)
     self.tank.setup()
     self.valve.setup()
+  
+  def teardown(self):
+    self.tank.teardown()
+    self.valve.teardown()
+    GPIO.cleanup()
 
   def loop(self):
     tank_stats = self.tank.loop()
