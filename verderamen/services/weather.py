@@ -11,6 +11,7 @@ DEFAULT_WHEATER_API_FORECAST_PATH="/v1/forecast.json"
 class Weather:
   def __init__(self):
     self.parse_coords()
+    self.enabled=get_config_key('WEATHER_ENABLED', bool, True)
     self.api_base_url=get_config_key('WEATHER_API_BASE_URL', str, DEFAULT_WHEATER_API_BASE_URL)
     self.api_forecast_path=get_config_key('WEATHER_API_FORECAST_PATH', str, DEFAULT_WHEATER_API_FORECAST_PATH)
     self.api_key=get_config_key('WEATHER_API_API_KEY', str)
@@ -19,7 +20,7 @@ class Weather:
     self.temperature_score_weight=get_config_key('WEATHER_WATER_TEMPERATURE_SCORE_WEIGHT', int, 0.8)
     self.humidity_score_weight=get_config_key('WEATHER_WATER_HUMIDITY_SCORE_WEIGHT', int, 0.3)
     self.low_rain_score_weight=get_config_key('WEATHER_WATER_LOW_RAIN_SCORE_WEIGHT', int, 1)
-    self.check_weather_at_datetime=datetime.strptime(get_config_key('WEATHER_CHECK_AT_TIME', str, '12:00 AM'), '%I:%M %p')
+    self.check_weather_at_datetime=datetime.strptime(get_config_key('WEATHER_CHECK_AT_TIME', str, '06:00 AM'), '%I:%M %p')
     self.check_weather_at_range_minutes=get_config_key('WEATHER_CHECK_AT_TIME_RANGE_MINUTES', int, 5)
     self.cached_timestamp=None
     self.cached_stats=None
@@ -90,6 +91,9 @@ class Weather:
     pass
 
   def fetch(self):
+    if not self.enabled:
+      return None
+    
     forecast_full_url=urljoin(self.api_base_url, self.api_forecast_path)
     params={
       "key": self.api_key,

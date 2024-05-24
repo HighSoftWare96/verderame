@@ -41,6 +41,7 @@ The weather will be checked within `WEATHER_CHECK_AT_TIME_RANGE_MINUTES` minutes
 
 The weather score system is based on this configuration keys:
 
+- `WEATHER_ENABLED` (**optional**, boolean, default: *True*): Enable weather module
 - `WEATHER_API_API_KEY` (**required**, string): API Key for Weather API forecast
 - `WEATHER_COORDINATES` (**required**, string/lat,lng): Coordinates to use for the weather forecast
 - `WEATHER_API_BASE_URL` (**optional**, string/URL, default: *https://api.weatherapi.com/*): base URL for Weather API
@@ -50,7 +51,7 @@ The weather score system is based on this configuration keys:
 - `WEATHER_WATER_TEMPERATURE_SCORE_WEIGHT` (**optional**, float/[0, 1], default: *0.8*): how much temperature will influence final weather score (0 nothing, 1 all)
 - `WEATHER_WATER_HUMIDITY_SCORE_WEIGHT` (**optional**, float/[0, 1], default: *0.3*): how much humidity will influence final weather score (0 nothing, 1 all)
 - `WEATHER_WATER_LOW_RAIN_SCORE_WEIGHT` (**optional**, string/[0, 1], default: *1*):  how much low rain (under 2mm of rain in a dat) will influence final weather score (0 nothing, 1 all)
-- `WEATHER_CHECK_AT_TIME` (**optional**, string/12:00 AM, default: *12:00 AM*): At what time the weather will be checked (once a day)
+- `WEATHER_CHECK_AT_TIME` (**optional**, string/12:00 AM, default: *06:00 AM*): At what time the weather will be checked (once a day)
 - `WEATHER_CHECK_AT_TIME_RANGE_MINUTES` (**optional**, int/minutes, default: *5*): Range before and after `WEATHER_CHECK_AT_TIME` in which the weather will be checked
 
 ### Tank level
