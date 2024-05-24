@@ -1,8 +1,6 @@
 import time
 import RPi.GPIO as GPIO
 from ..config import get_config_key
- 
-GPIO.setmode(GPIO.BCM)
 
 class TankLevel:
     def __init__(self):
