@@ -5,8 +5,8 @@ from urllib.parse import urljoin
 import logging
 from datetime import datetime
 
-DEFAULT_WHEATER_API_BASE_URL="https://api.weatherapi.com/v1/"
-DEFAULT_WHEATER_API_FORECAST_PATH="/forecast.json"
+DEFAULT_WHEATER_API_BASE_URL="https://api.weatherapi.com/"
+DEFAULT_WHEATER_API_FORECAST_PATH="/v1/forecast.json"
 
 class Weather:
   def __init__(self):
@@ -16,10 +16,12 @@ class Weather:
     self.api_key=get_config_key('WEATHER_API_API_KEY', str)
     self.high_temperature=get_config_key('WEATHER_WATER_HIGH_TEMPERATURE', int, 40)
     self.low_temperature=get_config_key('WEATHER_WATER_LOW_TEMPERATURE', int, 0)
-    self.temperature_score_weight=get_config_key('WEATHER_WATER_TEMPERATURE_SCORE', int, 0.8)
+    self.temperature_score_weight=get_config_key('WEATHER_WATER_TEMPERATURE_SCORE_WEIGHT', int, 0.8)
     self.humidity_score_weight=get_config_key('WEATHER_WATER_HUMIDITY_SCORE_WEIGHT', int, 0.3)
     self.low_rain_score_weight=get_config_key('WEATHER_WATER_LOW_RAIN_SCORE_WEIGHT', int, 1)
-    self.check_weather_at_time=datetime.strptime(get_config_key('WEATHER_CHECK_AT_TIME', str, '12:00 AM'), '%I:%M %p').time()
+    self.check_weather_at_datetime=datetime.strptime(get_config_key('WEATHER_CHECK_AT_TIME', str, '12:00 AM'), '%I:%M %p')
+    self.check_weather_at_range_minutes=get_config_key('WEATHER_CHECK_AT_TIME_RANGE_MINUTES', int, 5)
+    self.cached_timestamp=None
     self.cached_stats=None
     self.should_retry=False
   
@@ -28,7 +30,9 @@ class Weather:
 
   
   def teardown(self):
-    pass
+    self.cached_stats = None
+    self.cached_timestamp = None
+    self.should_retry = None
 
   def loop(self):
     if not self.should_check_weather():
@@ -38,6 +42,8 @@ class Weather:
       self.should_retry = False
       self.cached_stats = None
       self.cached_stats = self.fetch()
+      # save cached stats timestamp
+      self.cached_timestamp = datetime().now()
       return self.cached_stats
     except:
       logging.exception('Weather: unable to fetch for error')
@@ -46,11 +52,27 @@ class Weather:
       return
   
   def should_check_weather(self):
+    self.check_cache_expired()
+
     if self.should_retry:
+      # there has been an error
       return True
-    operative=(datetime.now().strftime('%I:%M %p') == self.check_weather_at_time.strftime('%I:%M %p'))
+  
+    now = datetime.now()
+    # align to current day
+    self.check_weather_at_datetime.replace(day=now.day, month=now.month, year=now.year)
+    time_difference_delta = now - self.check_weather_at_datetime
+    time_difference_minutes = time_difference_delta.total_seconds() / 60
+    operative=(time_difference_minutes >= (-1 * self.check_weather_at_range_minutes)) and (time_difference_minutes <= self.check_weather_at_range_minutes)
     return operative and self.cached_stats is None
-    
+  
+  def check_cache_expired(self):
+    last_checked_seconds = (23 * 60 * 60) + (30 * 60); 
+    if self.cached_timestamp is not None:
+      last_checked_seconds = (self.cached_timestamp - datetime.now()).total_seconds()
+    if last_checked_seconds > (23 * 60 * 60) + (30 * 60):
+      # passed more than 23 hours + 30 minutes, invalidate cache
+      self.cached_stats = None
     
   def parse_coords(self):
     raw_coords=get_config_key('WEATHER_COORDINATES', str)
@@ -65,6 +87,9 @@ class Weather:
 
     self.query_lat=coords[0]
     self.query_lng= coords[1]
+
+  def schedule_next_run(self):
+    pass
 
   def fetch(self):
     forecast_full_url=urljoin(self.api_base_url, self.api_forecast_path)
