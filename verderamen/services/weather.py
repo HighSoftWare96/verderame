@@ -119,7 +119,7 @@ class Weather:
     
     # save cached stats timestamp
     self.cached_stats=result
-    self.cached_timestamp = datetime().now()
+    self.cached_timestamp = datetime.now()
 
 
   def parse_forecast(self, json):
