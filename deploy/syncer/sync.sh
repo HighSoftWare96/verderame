@@ -1,5 +1,5 @@
 #!/bin/bash
-branch="$1"
+branch="$VERDERAME_BRANCH"
 
 if [[ -z $branch ]]; then
   branch="main"
@@ -13,4 +13,3 @@ git pull
 echo "🤖 Restarting service with new modifications..."
 sudo systemctl restart verderamen.service
 echo "✅ Service updated and restarted correctly!"
-

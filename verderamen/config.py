@@ -1,8 +1,10 @@
 from os import environ
 
-def get_config_key(key, ctor, default = None):
+def get_config_key(key, ctor, defaultValue = None):
   if key in environ:
+    if ctor == bool:
+      return environ[key].lower() == 'true'
     return ctor(environ[key])
-  if not default:
+  elif defaultValue is None:
     raise Exception(f'Configuration key {key} required!')
-  return default
+  return defaultValue
