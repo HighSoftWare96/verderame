@@ -3,6 +3,7 @@ import sys
 import logging
 import signal
 
+logging.basicConfig(level=logging.DEBUG, stream=sys.stdout)
 manager = Manager()
 
 '''
