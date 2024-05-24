@@ -1,4 +1,5 @@
 import RPi.GPIO as GPIO
+import logging
 from .io.tank_level import TankLevel
 from .io.solenoid_valve import SolenoidValve
 from time import sleep
@@ -21,6 +22,6 @@ class Manager:
   def loop(self):
     tank_stats = self.tank.loop()
     valve_stats = self.valve.loop()
-    print(f'current tank level: {tank_stats["percentage"]}% (water level from top: {tank_stats["avg"]}cm)')
-    print(f'is valve open? {valve_stats["is_open"]}')
+    logging.info(f'current tank level: {tank_stats["percentage"]}% (water level from top: {tank_stats["avg"]}cm)')
+    logging.info(f'is valve open? {valve_stats["is_open"]}')
     sleep(5)

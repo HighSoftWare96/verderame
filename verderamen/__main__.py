@@ -1,12 +1,13 @@
 from .manager import Manager
 import sys
+import logging
 import signal
 
 manager = Manager()
 
 '''
 def signal_handler(sig, frame):
-  print(f'{sig} received, tearing down')
+  logging.info(f'{sig} received, tearing down')
   manager.teardown()
   sys.exit(0)
 
@@ -16,9 +17,9 @@ signal.signal(signal.SIGTERM, signal_handler)
 
 def main():
   try:
-    print('Manager setup running...')
+    logging.info('Manager setup running...')
     manager.setup()
-    print('Manager setup done! Starting main loop...')
+    logging.info('Manager setup done! Starting main loop...')
     while(True):
       manager.loop()
   finally:
@@ -26,5 +27,5 @@ def main():
 
 
 if __name__ == '__main__':
-  print('Starting...')
+  logging.info('Starting...')
   main()
