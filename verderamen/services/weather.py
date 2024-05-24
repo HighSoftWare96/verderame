@@ -26,7 +26,7 @@ class Weather:
     self.should_retry=False
   
   def setup(self):
-    pass
+    self.fetch()
 
   
   def teardown(self):
@@ -41,9 +41,7 @@ class Weather:
     try:
       self.should_retry = False
       self.cached_stats = None
-      self.cached_stats = self.fetch()
-      # save cached stats timestamp
-      self.cached_timestamp = datetime().now()
+      self.fetch()
       return self.cached_stats
     except:
       logging.exception('Weather: unable to fetch for error')
@@ -113,10 +111,15 @@ class Weather:
     except:
       logging.exception('Weather: unable to fetch forecast data!')
 
+    result=None
     try:
       result=self.parse_forecast(json)
     except:
       logging.exception('Weather: unable to parse forecast data!')
+    
+    # save cached stats timestamp
+    self.cached_stats=result
+    self.cached_timestamp = datetime().now()
 
 
   def parse_forecast(self, json):

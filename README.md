@@ -42,6 +42,7 @@ The weather will be checked within `WEATHER_CHECK_AT_TIME_RANGE_MINUTES` minutes
 The weather score system is based on this configuration keys:
 
 - `WEATHER_API_API_KEY` (**required**, string): API Key for Weather API forecast
+- `WEATHER_COORDINATES` (**required**, string/lat,lng): Coordinates to use for the weather forecast
 - `WEATHER_API_BASE_URL` (**optional**, string/URL, default: *https://api.weatherapi.com/*): base URL for Weather API
 - `WEATHER_API_FORECAST_PATH` (**optional**, string/URL-path, default: */v1/forecast.json*): path for Weather API forecast
 - `WEATHER_WATER_HIGH_TEMPERATURE` (**optional**, integer/Celsius, default: *40*): high weather that will determine max water score
