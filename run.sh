@@ -1,4 +1,4 @@
 #!/bin/bash
-pipenv install
-pipenv shell
-pipenv run verderamen
+/home/pi/.local/bin/pipenv install
+/home/pi/.local/bin/pipenv shell
+/home/pi/.local/bin/pipenv run verderamen

@@ -11,6 +11,8 @@ Environment="PATH=$PATH:/home/pi/.local/bin/:/home/pi/.pyenv/plugins/pyenv-virtu
 Restart=on-failure
 KillMode=control-group
 TimeoutStopSec=5
+StandardOutput=journal
+StandardError=journal
 
 [Install]
 WantedBy=multi-user.target
