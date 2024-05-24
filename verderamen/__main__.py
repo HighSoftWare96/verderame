@@ -4,6 +4,7 @@ import signal
 
 manager = Manager()
 
+'''
 def signal_handler(sig, frame):
   print(f'{sig} received, tearing down')
   manager.teardown()
@@ -11,6 +12,7 @@ def signal_handler(sig, frame):
 
 signal.signal(signal.SIGINT, signal_handler)
 signal.signal(signal.SIGTERM, signal_handler)
+'''
 
 def main():
   try:
