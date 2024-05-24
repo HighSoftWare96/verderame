@@ -45,7 +45,7 @@ class Weather:
       self.fetch()
       return self.cached_stats
     except:
-      logging.exception('Weather: unable to fetch for error')
+      logging.exception('weather: unable to fetch for error')
       self.should_retry = True
       self.cached_stats = None
       return
@@ -113,13 +113,13 @@ class Weather:
       json=res.json()
       logging.info('Forecast JSON: %s', json)
     except:
-      logging.exception('Weather: unable to fetch forecast data!')
+      logging.exception('weather: unable to fetch forecast data!')
 
     result=None
     try:
       result=self.parse_forecast(json)
     except:
-      logging.exception('Weather: unable to parse forecast data!')
+      logging.exception('weather: unable to parse forecast data!')
     
     # save cached stats timestamp
     self.cached_stats=result
@@ -152,7 +152,7 @@ class Weather:
     # get current day sunset
     current_day_sunset_time=datetime.strptime(current_day_forecast["astro"]["sunset"], '%I:%M %p').time()
     current_day_sunset_datetime=datetime.combine(current_day_date, current_day_sunset_time)
-    logging.info('Weather: today the sun will sunset at %s', current_day_sunset_datetime)
+    logging.info('weather: today the sun will sunset at %s', current_day_sunset_datetime)
 
     next_24_temp_mean = (current_day_forecast["day"]["avgtemp_c"] + next_day_forecast["day"]["avgtemp_c"]) / 2
     next_24_temp_max = max(current_day_forecast["day"]["maxtemp_c"], next_day_forecast["day"]["maxtemp_c"])
@@ -169,16 +169,16 @@ class Weather:
       "will_rain": next_24_precip_mm > 2
     }
 
-    logging.info(f'Weather: today condition {current_day_forecast["day"]["condition"]["text"]}')
-    logging.info(f'Weather: tomorrow condition {next_day_forecast["day"]["condition"]["text"]}')
-    logging.info(f'Weather: next 24 hour stats: %s', stats)
+    logging.info(f'weather: today condition {current_day_forecast["day"]["condition"]["text"]}')
+    logging.info(f'weather: tomorrow condition {next_day_forecast["day"]["condition"]["text"]}')
+    logging.info(f'weather: next 24 hour stats: %s', stats)
 
     # water score: 0: do not water, 1: water for max time
     water_score = 1
 
     if stats["will_rain"]:
       water_score = 0
-      logging.info(f'Weather: water score 0, will rain in the next 24 hours!')
+      logging.info(f'weather: water score 0, will rain in the next 24 hours!')
       return water_score
     
     # if 0°C will water for .1 else proportionately till 40°C
@@ -198,5 +198,5 @@ class Weather:
       "humidity_score": humidity_score,
       "low_rain_score": low_rain_score,
     }
-    logging.info(f'Weather: final water score {water_score}, scores: %s!', scores)
+    logging.info(f'weather: final water score {water_score}, scores: %s!', scores)
     return water_score
