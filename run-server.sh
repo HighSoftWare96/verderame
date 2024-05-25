@@ -1,4 +1,4 @@
 #!/bin/bash
 pipenv install
 pipenv shell
-pipenv run sync
+pipenv run server
