@@ -1,4 +1,3 @@
 #!/bin/bash
-pipenv install
-pipenv shell
-pipenv run server
+/home/pi/.local/bin/pipenv install
+/home/pi/.local/bin/pipenv run python -m verderamen-server
