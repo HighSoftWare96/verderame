@@ -38,7 +38,7 @@ def enqueue_message(queueName, type, payload, emptyQueueFirst = False) -> Interc
     while emptyQueueFirst and not queue.empty():
       queue.get(timeout=50)
     queue.put(encoded)
-  sync_queue_file(queueName, send_message)
+  __with_queue(queueName, send_message)
   
 
 def list_messages(queueName):
@@ -54,14 +54,14 @@ def list_messages(queueName):
       except queue.Empty:
         emptied = True
     return messages
-  return sync_queue_file(queueName, unravel_queue)
+  return __with_queue(queueName, unravel_queue)
 
 
-def sync_queue_file(queue_name, handler):
+def __with_queue(queue_name, handler):
   if queue_name not in QUEUES:
     raise('Expected valid queue!')
 
-  ensure_queue(queue_name)
+  __ensure_queue(queue_name)
   queue_file_path = QUEUES[queue_name]
   with open(queue_file_path, 'wb') as queue_file:
     # reload current queue
@@ -72,7 +72,7 @@ def sync_queue_file(queue_name, handler):
     pickle.dump(queue, queue_file)
     return result
   
-def ensure_queue(queue_name):
+def __ensure_queue(queue_name):
   if queue_name not in QUEUES:
     raise('Expected valid queue!')
   
