@@ -38,7 +38,8 @@ def enqueue_message(queueName, type, payload, emptyQueueFirst = False) -> Interc
     while emptyQueueFirst and not queue.empty():
       queue.get(timeout=50)
     queue.put(encoded)
-  __with_queue(queueName, send_message)
+    return message
+  return __with_queue(queueName, send_message)
   
 
 def list_messages(queueName):
