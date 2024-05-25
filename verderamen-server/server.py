@@ -8,3 +8,4 @@ def build_server():
     codebase_routes(app)
     app.run(host='127.0.0.1', port=(port))
     logging.info(f"server: verderamen server listening on port {port}")
+    logging.info('%s', app.url_map)
