@@ -20,11 +20,10 @@ def send_telemetries(to_server_q, telemetries):
       "parent_pid": getppid(),
       "core_pid": getpid(),
       "sttime": start_time.isoformat(),
-      "uptime": (datetime.now() - start_time).total_seconds
+      "uptime": (datetime.now() - start_time).total_seconds()
     },
     "telemetries": telemetries
   }
-  print('%s', full_report)
   enqueue_message(to_server_q, INTERCOM_MESSAGE_TYPES["telemetries"], full_report, emptyQueueFirst=True)
 
 def main(to_core_q, to_server_q, event):
