@@ -22,7 +22,9 @@ class SolenoidValve:
      stats = {
         "is_open": is_open
      }
-     return stats
+     return {
+        "stats": stats
+      }
   
   def open(self):
      GPIO.output(self.valve_transistor_base_out_pin, GPIO.HIGH)

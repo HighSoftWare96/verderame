@@ -25,7 +25,12 @@ class TankLevel:
         'percentage': percentage,
         'avg': avg
       }
-      return stats
+      return {
+        "stats": stats,
+        "scores": {
+           "final_score": int(stats["percentage"] > 5) 
+        }
+      }
       
 
     def measure_one(self):

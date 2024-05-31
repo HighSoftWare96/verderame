@@ -189,6 +189,10 @@ class Weather:
       "temperature_score": temperature_score,
       "humidity_score": humidity_score,
       "low_rain_score": low_rain_score,
+      "final_score": water_score
     }
     logging.info(f'weather: final water score {water_score}, scores: %s!', scores)
-    return water_score
+    return {
+      "stats": stats,
+      "scores": scores
+    }

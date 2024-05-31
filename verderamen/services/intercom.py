@@ -40,11 +40,8 @@ def list_messages(queue):
     try:
       message = queue.get(timeout=.3)
       decoded = json.loads(message)
-      print(decoded)
       intercom_message = IntercomMessage(decoded["type"], decoded["payload"], decoded["timestamp"])
       messages.append(intercom_message)
     except Empty:
-      print('emptied')
       emptied = True
-  print(messages)
   return messages
