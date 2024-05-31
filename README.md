@@ -32,7 +32,7 @@ The server should be running as systemd service `verderamen`, this service will 
 
 ### Telemetries server
 
-This application exposes the telemetries at the endpoint `GET /telemetries` with Basic authentication `$$admin` and `SERVER_PASSWORD` (**required**, string) passed on runtime.
+This application exposes the telemetries at the endpoint `GET /telemetries` with Basic authentication `$$admin` and `TELEMETRIES_SERVER_PASSWORD` (**required**, string) passed on runtime.
 
 ### Weather forecast
 
