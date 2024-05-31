@@ -8,7 +8,7 @@ WorkingDirectory=/home/pi/verderamen
 User=pi
 EnvironmentFile=/home/pi/verderamen/.env
 Environment="PATH=$PATH:/home/pi/.local/bin/:/home/pi/.pyenv/plugins/pyenv-virtualenv/shims:/home/pi/.pyenv/shims:/home/pi/.pyenv/bin:/home/pi/.pyenv/plugins/pyenv-virtualenv/shims:/home/pi/.pyenv/bin:/home/pi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games"
-Restart=on-failure
+Restart=always
 KillMode=control-group
 TimeoutStopSec=5
 StandardOutput=journal
