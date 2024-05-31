@@ -164,14 +164,6 @@ class Weather:
 
     logging.info(f'weather: today conditions {current_day_forecast["day"]["condition"]["text"]}')
     logging.info(f'weather: next 24 hour stats: %s', stats)
-
-    # water score: 0: do not water, 1: water for max time
-    water_score = 1
-
-    if stats["will_rain"]:
-      water_score = 0
-      logging.info(f'weather: water score 0, will rain in the next 24 hours!')
-      return water_score
     
     # if 0°C will water for .1 else proportionately till 40°C
     temperature_score = rerange(stats["next_24_temp_mean"], self.low_temperature, self.high_temperature, .1, 1)
@@ -191,6 +183,15 @@ class Weather:
       "low_rain_score": low_rain_score,
       "final_score": water_score
     }
+    
+    if stats["will_rain"]:
+      water_score = 0
+      logging.info(f'weather: water score 0, will rain in the next 24 hours!')
+      return {
+        "stats": stats,
+        "scores": scores
+      }
+
     logging.info(f'weather: final water score {water_score}, scores: %s!', scores)
     return {
       "stats": stats,
