@@ -30,4 +30,8 @@ class Manager:
     logging.info(f'tank: current level {tank_stats["percentage"]}% (water level from top: {tank_stats["avg"]}cm)')
     logging.info(f'valve: is valve open? {bool(valve_stats["is_open"])}')
     logging.info('weather: stats %s', weather_stats)
-    sleep(5)
+    return {
+      "tank_stats": tank_stats,
+      "valve_stats": valve_stats,
+      "weather_stats": weather_stats
+    }

@@ -9,6 +9,7 @@ flask = "*"
 flask-httpauth = "*"
 python-dotenv = "*"
 requests = "*"
+psutil = "*"
 
 [dev-packages]
 
