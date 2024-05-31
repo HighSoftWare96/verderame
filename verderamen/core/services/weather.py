@@ -20,7 +20,7 @@ class Weather:
     self.temperature_score_weight=get_config_key('WEATHER_WATER_TEMPERATURE_SCORE_WEIGHT', int, 0.8)
     self.humidity_score_weight=get_config_key('WEATHER_WATER_HUMIDITY_SCORE_WEIGHT', int, 0.3)
     self.low_rain_score_weight=get_config_key('WEATHER_WATER_LOW_RAIN_SCORE_WEIGHT', int, 1)
-    self.check_weather_at_datetime=datetime.strptime(get_config_key('WEATHER_CHECK_AT_TIME', str, '00:01 AM'), '%I:%M %p')
+    self.check_weather_at_datetime=datetime.strptime(get_config_key('WEATHER_CHECK_AT_TIME', str, '12:01 AM'), '%I:%M %p')
     self.check_weather_at_range_minutes=get_config_key('WEATHER_CHECK_AT_TIME_RANGE_MINUTES', int, 5)
     self.cached_timestamp=None
     self.cached_stats=None

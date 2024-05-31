@@ -53,7 +53,7 @@ The weather score system is based on this configuration keys:
 - `WEATHER_WATER_TEMPERATURE_SCORE_WEIGHT` (**optional**, float/[0, 1], default: *0.8*): how much temperature will influence final weather score (0 nothing, 1 all)
 - `WEATHER_WATER_HUMIDITY_SCORE_WEIGHT` (**optional**, float/[0, 1], default: *0.3*): how much humidity will influence final weather score (0 nothing, 1 all)
 - `WEATHER_WATER_LOW_RAIN_SCORE_WEIGHT` (**optional**, string/[0, 1], default: *1*):  how much low rain (under 2mm of rain in a dat) will influence final weather score (0 nothing, 1 all)
-- `WEATHER_CHECK_AT_TIME` (**optional**, string/12:00 AM, default: *00:01 AM*): At what time the weather will be checked (once a day)
+- `WEATHER_CHECK_AT_TIME` (**optional**, string/12:00 AM, default: *12:01 AM*): At what time the weather will be checked (once a day)
 - `WEATHER_CHECK_AT_TIME_RANGE_MINUTES` (**optional**, int/minutes, default: *5*): Range before and after `WEATHER_CHECK_AT_TIME` in which the weather will be checked
 
 ### Tank level
