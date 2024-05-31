@@ -28,7 +28,7 @@ class TankLevel:
       return {
         "stats": stats,
         "scores": {
-           "final_score": int(stats["percentage"] > 5) 
+           "final_score": int(stats['percentage'] > 5) 
         }
       }
       
