@@ -20,4 +20,3 @@ sudo systemctl status verderamen.service
 sudo systemctl status ngrok.service
 
 echo "Your app is listening on $NGROK_STATIC_DOMAIN..."
-
