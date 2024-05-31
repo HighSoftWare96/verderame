@@ -183,14 +183,10 @@ class Weather:
       "low_rain_score": low_rain_score,
       "final_score": water_score
     }
-    
+
     if stats["will_rain"]:
-      water_score = 0
-      logging.info(f'weather: water score 0, will rain in the next 24 hours!')
-      return {
-        "stats": stats,
-        "scores": scores
-      }
+      scores["final_score"] = 0
+      scores.pop("low_rain_score")
 
     logging.info(f'weather: final water score {water_score}, scores: %s!', scores)
     return {
