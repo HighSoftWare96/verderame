@@ -9,7 +9,7 @@ DontLetYourVegetablesDie!
 For the deploy on the Raspberry device:
 
 - The Rasberry device port 5000 will be visible online through a service called [Ngrok](https://dashboard.ngrok.com/get-started/setup/raspberrypi)
-- There is a small server (`verderamen-server`) that accepts requests on `POST /codebase/webhook :5000`
+- There is a small server (`verderamen/server`) that accepts requests on `POST /codebase/webhook :5000`
 - On valid requests the servers pulls the content of this repository on the branch `main` (or otherwise the specified one in `VERDERAME_BRANCH`) and restart the systemd service related to this project
 - Github is configured to call the server with WebHooks each time some code is pushed
 
@@ -22,7 +22,7 @@ The server also includes telemetries delivery from the application.
 - Fix your environment inside `verderamen/.env` (add NGROK_STATIC_DOMAIN, NGROK_APP_TOKEN)
 - Run `pipenv run install`
 
-The server should be running as systemd service `verderamen-server`, this service will sync automatically the just cloned repository and restart the systemd service `verderamen` that is the actual application.
+The server should be running as systemd service `verderamen`, this service will sync automatically the just cloned repository and restart itself.
 
 ## GPIO Schema
 

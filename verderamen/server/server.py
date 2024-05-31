@@ -9,4 +9,3 @@ def build_server():
     logging.info(f"server: verderamen server listening on port {port}")
     logging.info('%s', app.url_map)
     app.run(host='127.0.0.1', port=(port))
-    return app
