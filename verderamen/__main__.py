@@ -26,7 +26,7 @@ def exit():
   sys.exit(0)
 
 def signal_handler(sig, frame):
-  logging.info(f'{sig} received, tearing down')
+  logging.info(f'parent: {sig} received, tearing down')
   exit()
 
 signal.signal(signal.SIGINT, signal_handler)
@@ -37,7 +37,7 @@ def main():
 
   while True:
     if event.is_set() or not core_process.is_alive() or not server_process.is_alive():
-      logging.error('Event is set or one or more subprocesses ended unexpectedly! Terminating...')
+      logging.error('parent: event is set or one or more subprocesses ended unexpectedly! Terminating...')
       exit()
     time.sleep(.5)
 
