@@ -17,5 +17,4 @@ python_version = "3.10"
 
 [scripts]
 install = "bash ./deploy/install.sh"
-server = "python -m verderamen-server"
 verderamen = "python -m verderamen"
