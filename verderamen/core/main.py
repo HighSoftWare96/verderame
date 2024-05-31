@@ -24,7 +24,7 @@ def send_telemetries(to_server_q, telemetries):
     },
     "telemetries": telemetries
   }
-  
+  print('%s', full_report)
   enqueue_message(to_server_q, INTERCOM_MESSAGE_TYPES["telemetries"], full_report, emptyQueueFirst=True)
 
 def main(to_core_q, to_server_q, event):
