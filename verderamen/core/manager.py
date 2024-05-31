@@ -27,11 +27,11 @@ class Manager:
     tank_stats = self.tank.loop()
     valve_stats = self.valve.loop()
     weather_stats = self.weather.loop()
-    logging.info(f'tank: current level {tank_stats["percentage"]}% (water level from top: {tank_stats["avg"]}cm)')
-    logging.info(f'valve: is valve open? {bool(valve_stats["is_open"])}')
+    logging.info(f'tank: current level {tank_stats["stats"]["percentage"]}% (water level from top: {tank_stats["stats"]["avg"]}cm)')
+    logging.info(f'valve: is valve open? {bool(valve_stats["stats"]["is_open"])}')
     logging.info('weather: stats %s', weather_stats)
     return {
-      "tank_stats": tank_stats,
-      "valve_stats": valve_stats,
-      "weather_stats": weather_stats
+      "tank": tank_stats,
+      "valve": valve_stats,
+      "weather": weather_stats
     }
