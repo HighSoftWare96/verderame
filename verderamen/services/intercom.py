@@ -38,7 +38,7 @@ def list_messages(queue):
   messages = []
   while not emptied:
     try:
-      message = queue.get(timeout=200)
+      message = queue.get(timeout=.3)
       decoded = json.loads(message)
       print(decoded)
       intercom_message = IntercomMessage(decoded["type"], decoded["payload"], decoded["timestamp"])
