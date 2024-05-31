@@ -1,8 +1,6 @@
 from datetime import datetime
-from multiprocessing import Queue
-from os import path
+from queue import Empty
 import json
-import pickle
 
 QUEUE_MAX_SIZE = 10
 INTERCOM_MESSAGE_TYPES = {
@@ -44,6 +42,6 @@ def list_messages(queue):
       decoded = json.load(message)
       intercom_message = IntercomMessage(decoded["type"], decoded["payload"], decoded["timestamp"])
       messages.append(intercom_message)
-    except queue.Empty:
+    except Empty:
       emptied = True
   return messages
