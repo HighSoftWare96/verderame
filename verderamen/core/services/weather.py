@@ -20,7 +20,7 @@ class Weather:
     self.temperature_score_weight=get_config_key('WEATHER_WATER_TEMPERATURE_SCORE_WEIGHT', int, 0.8)
     self.humidity_score_weight=get_config_key('WEATHER_WATER_HUMIDITY_SCORE_WEIGHT', int, 0.3)
     self.low_rain_score_weight=get_config_key('WEATHER_WATER_LOW_RAIN_SCORE_WEIGHT', int, 1)
-    self.check_weather_at_datetime=datetime.strptime(get_config_key('WEATHER_CHECK_AT_TIME', str, '06:00 AM'), '%I:%M %p')
+    self.check_weather_at_datetime=datetime.strptime(get_config_key('WEATHER_CHECK_AT_TIME', str, '00:01 AM'), '%I:%M %p')
     self.check_weather_at_range_minutes=get_config_key('WEATHER_CHECK_AT_TIME_RANGE_MINUTES', int, 5)
     self.cached_timestamp=None
     self.cached_stats=None
@@ -98,7 +98,7 @@ class Weather:
     params={
       "key": self.api_key,
       "q": f'{self.query_lat},{self.query_lng}',
-      "days": 2,
+      "days": 1,
       "aqi": 'no',
       "alerts": 'no'
     }
@@ -111,7 +111,7 @@ class Weather:
       res=requests.get(forecast_full_url, params=params, headers=headers)
       res.raise_for_status()
       json=res.json()
-      logging.info('Forecast JSON: %s', json)
+      logging.info('weather: fetched forecast JSON: %s', json)
     except:
       logging.exception('weather: unable to fetch forecast data!')
 
@@ -130,35 +130,28 @@ class Weather:
     forecastdays = json["forecast"]["forecastday"]
     current_day_forecast = None
     current_day_date = None
-    next_day_forecast = None
-    next_day_date = None
 
-    for forecastday in forecastdays:
-      forecast_date_epoch=forecastday["date_epoch"]
-      forecast_date=datetime.fromtimestamp(forecast_date_epoch).date()
-      now=datetime.now().date()
-      is_today= bool(now == forecast_date)
+    now=datetime.now().date()
+    forecast_date_epoch=forecastdays[0]["date_epoch"]
+    forecast_date=datetime.fromtimestamp(forecast_date_epoch).date()
+    is_today= bool(now == forecast_date)
 
-      if is_today:
-        current_day_forecast=forecastday
-        current_day_date=forecast_date
-      else:
-        next_day_forecast=forecastday
-        next_day_date=forecast_date
-
-    if current_day_forecast is None or next_day_forecast is None:
-      raise Exception('Unable to find current day forecast or next day forecast')
+    if not is_today:
+      raise Exception('Unable to get current day forecast!')
+    else:
+      current_day_forecast=forecastdays[0]
+      current_day_date=forecast_date
 
     # get current day sunset
     current_day_sunset_time=datetime.strptime(current_day_forecast["astro"]["sunset"], '%I:%M %p').time()
     current_day_sunset_datetime=datetime.combine(current_day_date, current_day_sunset_time)
     logging.info('weather: today the sun will sunset at %s', current_day_sunset_datetime)
 
-    next_24_temp_mean = (current_day_forecast["day"]["avgtemp_c"] + next_day_forecast["day"]["avgtemp_c"]) / 2
-    next_24_temp_max = max(current_day_forecast["day"]["maxtemp_c"], next_day_forecast["day"]["maxtemp_c"])
-    next_24_temp_min = min(current_day_forecast["day"]["mintemp_c"], next_day_forecast["day"]["mintemp_c"])
-    next_24_precip_mm = (current_day_forecast["day"]["totalprecip_mm"] + next_day_forecast["day"]["totalprecip_mm"])
-    next_24_humidity_mean = (current_day_forecast["day"]["avghumidity"] + next_day_forecast["day"]["avghumidity"]) / 2
+    next_24_temp_mean = current_day_forecast["day"]["avgtemp_c"]
+    next_24_temp_max = current_day_forecast["day"]["maxtemp_c"]
+    next_24_temp_min = current_day_forecast["day"]["mintemp_c"]
+    next_24_precip_mm = current_day_forecast["day"]["totalprecip_mm"]
+    next_24_humidity_mean = current_day_forecast["day"]["avghumidity"]
     
     stats = {
       "next_24_temp_max": next_24_temp_mean,
@@ -169,8 +162,7 @@ class Weather:
       "will_rain": next_24_precip_mm > 2
     }
 
-    logging.info(f'weather: today condition {current_day_forecast["day"]["condition"]["text"]}')
-    logging.info(f'weather: tomorrow condition {next_day_forecast["day"]["condition"]["text"]}')
+    logging.info(f'weather: today conditions {current_day_forecast["day"]["condition"]["text"]}')
     logging.info(f'weather: next 24 hour stats: %s', stats)
 
     # water score: 0: do not water, 1: water for max time
