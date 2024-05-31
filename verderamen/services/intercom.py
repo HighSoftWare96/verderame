@@ -44,4 +44,5 @@ def list_messages(queue):
       messages.append(intercom_message)
     except Empty:
       emptied = True
+  print(messages)
   return messages
