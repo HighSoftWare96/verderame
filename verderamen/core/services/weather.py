@@ -1,4 +1,4 @@
-from ..config import get_config_key 
+from ...config import get_config_key 
 from ..utils.numbers import rerange, weighted_mean
 import requests
 from urllib.parse import urljoin

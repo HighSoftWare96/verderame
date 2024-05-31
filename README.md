@@ -30,6 +30,10 @@ The server should be running as systemd service `verderamen`, this service will 
 
 ## Overview
 
+### Telemetries server
+
+This application exposes the telemetries at the endpoint `GET /telemetries` with Basic authentication `$$admin` and `SERVER_PASSWORD` (**required**, string) passed on runtime.
+
 ### Weather forecast
 
 This application checks weather forecast with [Weather API](https://www.weatherapi.com/api-explorer.aspx#forecast) and assigns a score (from 0 to 1) that will be decisive in determining whether to irrigate or not (0 no water, 1 max time possible). The score is calculated with a weighted mean with some scores derived from temperature, humidity and rain (when under 2mm/24hours). If in the next 24 hours it will rain above 2mm/24hours the weather water score (WWS) will be definitely 1.

@@ -1,4 +1,4 @@
-from ..config import get_config_key
+from ...config import get_config_key
 import RPi.GPIO as GPIO
 
 class SolenoidValve:

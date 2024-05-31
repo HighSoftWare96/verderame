@@ -1,6 +1,6 @@
 import time
 import RPi.GPIO as GPIO
-from ..config import get_config_key
+from ...config import get_config_key
 
 class TankLevel:
     def __init__(self):
