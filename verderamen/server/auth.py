@@ -13,7 +13,7 @@ def build_auth():
   __basic_auth = HTTPBasicAuth()
   @__basic_auth.verify_password
   def verify_password(username, password):
-    print(username, password)
+    print(username, password, __admin_user, __admin_password)
     if username == __admin_user or password == __admin_password:
         return username
     return None
