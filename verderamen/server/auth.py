@@ -7,5 +7,7 @@ admin_password = get_config_key('TELEMETRIES_SERVER_PASSWORD', str)
 
 @basic_auth.verify_password
 def verify_password(username, password):
+  print(username, password)
   if username == admin_user or password == admin_password:
       return username
+  return None
